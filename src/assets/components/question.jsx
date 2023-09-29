@@ -22,9 +22,6 @@ function Question({questionNumber,questionText}) {
         setisQuestionActive(false);   
         setTimerFinished(true);   
         clearInterval(timer);
-
-      
-       
       }
     }, 1000); // Update every 1 second
 
@@ -36,7 +33,7 @@ function Question({questionNumber,questionText}) {
     return (
         <div id="question" style={{ backgroundColor }}>  
         
-        <p style={{marginLeft:'5px'}}> Question{questionNumber} </p><br/>
+        <p style={{marginLeft:'5px',fontWeight:'1px',fontSize:'12px'}}> Question {questionNumber} </p><br/>
         <p style={{marginLeft:'5px'}}>{questionText}</p><br/>
         <div id="timeAndSpeakNow">
         {timerFinished ? (

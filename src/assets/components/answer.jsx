@@ -1,38 +1,42 @@
-import React from "react";
-import { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import CircularTimer from "./circulartimer";
-
 
 function Answer() {
   const [secondsRemaining, setSecondsRemaining] = useState(60);
-  const [backgroundColor, setBackgroundColor] = useState("#C0DAF8");
+  const [backgroundColor, setBackgroundColor] = useState("#80808080"); 
   const [timerFinished, setTimerFinished] = useState(false);
-  
-  // Start the timer when the component mounts
-useEffect(() => {
-  const timer = setInterval(() => {
-    if (secondsRemaining > 0) {
-      setSecondsRemaining(secondsRemaining - 1);
-    } else {
-      // Timer has ended, change background color to white
-      setBackgroundColor("white");     
-      setTimerFinished(true);   
-      clearInterval(timer);
-    }
-  }, 1000); // Update every 1 second
 
-  // Clean up the timer when the component unmounts
-  return () => clearInterval(timer);
-}, [secondsRemaining]);
-    return (
-        <div id="answer" style={{ backgroundColor }}>
-
-          <CircularTimer />
-        </div>
+  // Delay the start of the timer by 20 seconds
+  useEffect(() => {
+    const delayTimer = setTimeout(() => {
+      // After the delay, change background color to blue when the timer starts
+      setBackgroundColor("#C0DAF8");
       
-    );
-  }
-  
-  export default Answer;
+      // Start the timer after the delay
+      const timer = setInterval(() => {
+        if (secondsRemaining > 0) {
+          setSecondsRemaining(secondsRemaining - 1);
+        } 
+          else {
+          // Timer has ended
+          setBackgroundColor("#80808080");
+          setTimerFinished(true);
+          clearInterval(timer);
+        }
+      }, 1000); // Update every 1 second
 
+      // Clean up the timer when the component unmounts
+      return () => clearInterval(timer);
+    }, 20000); // 20 seconds
 
+    return () => clearTimeout(delayTimer);
+  }, []);
+
+  return (
+    <div id="answer" style={{ backgroundColor }}>
+      <CircularTimer />
+    </div>
+  );
+}
+
+export default Answer;

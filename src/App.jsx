@@ -18,7 +18,8 @@ function App() {
       questionText={questionData.text}
      />
     </div>
-    <Answer/>
+         <Answer />
+     
     </>
   );
 }
